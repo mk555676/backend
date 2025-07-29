@@ -40,7 +40,7 @@ HttpResponseRedirect.allowed_schemes = ["http", "https", "voiceorderapp"]
 SECRET_KEY = env('SECRET_KEY', default='django-insecure-_0jd6r-d@t_j5harf&v-2m(-_xgcm0+f8b!hl6zy=l*juys)-@')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = env('DEBUG', default='False') == 'True'
+DEBUG = env('DEBUG', default='True') == 'True'
 
 SECURE_REDIRECT_EXEMPT_SCHEMES = [
     "voiceorderapp",  # Allow your custom app scheme
@@ -102,12 +102,12 @@ WSGI_APPLICATION = 'myproject.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': env('DATABASE_NAME', default='django_db'),
-        'USER': env('DATABASE_USER', default='django_user'),
-        'PASSWORD': env('DATABASE_PASSWORD', default=''),
-        'HOST': env('DATABASE_HOST', default='localhost'),
-        'PORT': env('DATABASE_PORT', default='5432'),
+        'ENGINE': 'django.db.backends.sqlite3' if DEBUG else 'django.db.backends.postgresql',
+        'NAME': BASE_DIR / 'db.sqlite3' if DEBUG else env('DATABASE_NAME', default='django_db'),
+        'USER': env('DATABASE_USER', default='django_user') if not DEBUG else '',
+        'PASSWORD': env('DATABASE_PASSWORD', default='') if not DEBUG else '',
+        'HOST': env('DATABASE_HOST', default='localhost') if not DEBUG else '',
+        'PORT': env('DATABASE_PORT', default='5432') if not DEBUG else '',
     }
 }
 
