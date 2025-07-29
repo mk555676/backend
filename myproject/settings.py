@@ -97,17 +97,12 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'myproject.wsgi.application'
 
-# Database
-# https://docs.djangoproject.com/en/5.0/ref/settings/#databases
-
+# Database - Using Firebase Firestore
+# Django still needs a database for migrations and admin, so we use SQLite for that
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3' if DEBUG else 'django.db.backends.postgresql',
-        'NAME': BASE_DIR / 'db.sqlite3' if DEBUG else env('DATABASE_NAME', default='django_db'),
-        'USER': env('DATABASE_USER', default='django_user') if not DEBUG else '',
-        'PASSWORD': env('DATABASE_PASSWORD', default='') if not DEBUG else '',
-        'HOST': env('DATABASE_HOST', default='localhost') if not DEBUG else '',
-        'PORT': env('DATABASE_PORT', default='5432') if not DEBUG else '',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 

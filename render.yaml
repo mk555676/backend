@@ -14,39 +14,12 @@ services:
         value: False
       - key: ALLOWED_HOSTS
         value: django-backend.onrender.com
-      - key: DATABASE_NAME
-        fromDatabase:
-          name: django-db
-          property: databaseName
-      - key: DATABASE_USER
-        fromDatabase:
-          name: django-db
-          property: user
-      - key: DATABASE_PASSWORD
-        fromDatabase:
-          name: django-db
-          property: password
-      - key: DATABASE_HOST
-        fromDatabase:
-          name: django-db
-          property: host
-      - key: DATABASE_PORT
-        fromDatabase:
-          name: django-db
-          property: port
       - key: REDIS_URL
         fromService:
           type: redis
           name: django-redis
           property: connectionString
 
-databases:
-  - name: django-db
-    plan: starter
-    databaseName: django_db
-    user: django_user
-
-services:
   - type: redis
     name: django-redis
     plan: starter 
